@@ -8,3 +8,7 @@ interface Geometric{
     public double get_area();
     public void   move_object(int dx, int dy);
 }
+
+interface GeometricPredicate{
+    public boolean predicate(Geometric shape);
+}
