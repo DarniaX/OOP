@@ -4,10 +4,10 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 		Geometric[] list = new Geometric[10];
-		command();
+		command(list);
     }
 
-	public static void command(){
+	public static void command(Geometric[] list){
 		Scanner scan = new Scanner(System.in);
         System.out.println("Please enter a command: ");
         String command = scan.next();
@@ -17,9 +17,9 @@ public class Main {
                 //quit program
                 break;
             case "show":
-				System.out.println("test1");
+				for (int i = 0; i < list.length; )
                 //list geometric objects
-				command();
+				command(list);
                 break;
             case "circle":
 				double circlex = Double.valueOf(scan.next());
@@ -27,7 +27,7 @@ public class Main {
 				double circler = Double.valueOf(scan.next());
 				double centre[] = {circlex, circley};
                 //add new circle
-				command();
+				command(list);
                 break;
             case "rectangle":
 				double rectx = Double.valueOf(scan.next());
@@ -36,38 +36,55 @@ public class Main {
 				double rexth = Double.valueOf(scan.next());
 				double corner[] = {rectx, rexty};
                 //add new rectangle
-				command();
+				command(list);
                 break;
             case "move":
 				double movei = Double.valueOf(scan.next());
 				double dx = Double.valueOf(scan.next());
 				double dy = Double.valueOf(scan.next());
                 //move object
-				command();
+				command(list);
                 break;
 			case "remove":
 				double removei = Double.valueOf(scan.next());
 				//remove object at i
-				command();
+				command(list);
 				break;
 			case "filter":
 				String filterc = scan.next();
 				double filtern = Double.valueOf(scan.next());
 				//filter
-				command();
+				command(list);
 				break;
 			case "sort":
 				String sortc = scan.next();
+				switch (sortc) {
+					case "x":
+						LeftSorter.compare(list); 
+						break;
+					case "y":
+						BottomSorter.compare(list);
+						break;
+					default:
+						AreaSorter.compare(list);
+				}
 				//sort
-				command();
+				command(list);
 				break;
 			default:
 				System.out.println("No valid command given. Enter a new command:");
-				command();
+				command(list);
         }
 		scan.close();
     }
 
+	public static int firstFreeIndex(Geometric[] list) {
+		for (int i = 0; i < list.length; i++){
+			if (list[i] = null) //weet dat dit niet werkt maar idk hoe ik lege indexes van de array kan vinden....
+				return i;
+			else return -1;
+		}
+	}
 	
 }
 
