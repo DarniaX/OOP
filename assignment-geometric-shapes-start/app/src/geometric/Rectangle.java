@@ -27,7 +27,7 @@ public class Rectangle implements Geometric {
         //Area = Pi*r*r (Pi*r^2)
         return this.Height*this.Width;
     }
-    public void move_object(int dx, int dy){
+    public void move_object(double dx, double dy){
         this.Corner[0] += dx;
         this.Corner[1] += dy;
     }
