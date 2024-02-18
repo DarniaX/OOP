@@ -28,7 +28,7 @@ public class Circle implements Geometric{
         //Area = Pi*r*r (Pi*r^2)
         return 3.1415*this.Radius*this.Radius;
     }
-    public void move_object(int dx, int dy){
+    public void move_object(double dx, double dy){
         this.Centre[0] += dx;
         this.Centre[1] += dy;
     }
