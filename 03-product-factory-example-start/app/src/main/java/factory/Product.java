@@ -1,9 +1,10 @@
 package factory;
 
 public interface Product {
-    public double GetPrice();
-    public void SetPrice(double Price);
+    double GetPrice();
+    void SetPrice(double Price);
     default void ChangePrice(double Factor){
         this.SetPrice(this.GetPrice()*Factor);
     }
+    void accept(ProductVisitor visitor);
 }

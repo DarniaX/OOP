@@ -19,4 +19,13 @@ public class Chair implements Product{
         return this.Material;
     }
 
+    @Override
+    public String toString(){
+        return String.format("$%-8.2f %s chair", Price, Material);
+    }
+
+    @Override
+    public void accept(ProductVisitor visitor){
+        visitor.visit(this);
+    }
 }

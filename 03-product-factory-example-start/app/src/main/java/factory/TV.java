@@ -6,95 +6,107 @@ public class TV implements Product, EnergyConsumer, Display{
     //Product
     private double Price;
     //EnergyConsumer
-    private double Voltage;
-    private double Current;
+    private final double Voltage;
+    private final double Current;
     //Display
-    private int VerticalResolution;
-    private int HorizontalResolution;
-    private int BitsPerPixel;
-    private int RefreshRate;
-    private String Brand;
-    private String Model;
-    private String DisplayTechnology;
-    private List<String> DisplayConnectors;
+    private final int VerticalResolution;
+    private final int HorizontalResolution;
+    private final int BitsPerPixel;
+    private final int RefreshRate;
+    private final String Brand;
+    private final String Model;
+    private final String DisplayTechnology;
+    private final List<String> DisplayConnectors;
 
     //Methods
-    //Constructor
-    private TV(TVBuilder builder){
+
+
+    public static class Builder {
         //Fields
         //Product
-        this.Price=builder.Price;
+        private double Price = 0;
         //EnergyConsumer
-        this.Voltage=builder.Voltage;
-        this.Current=builder.Current;
-        //Display
-        this.VerticalResolution=builder.VerticalResolution;
-        this.HorizontalResolution=builder.HorizontalResolution;
-        this.BitsPerPixel=builder.BitsPerPixel;
-        this.RefreshRate=builder.RefreshRate;
-        this.Brand=builder.Brand;
-        this.Model=builder.Model;
-        this.DisplayTechnology=builder.DisplayTechnology;
-        this.DisplayConnectors=builder.DisplayConnectors;
-    }
-    public class TVBuilder {
-        //Fields
-        //Product
-        private double Price;
-        //EnergyConsumer
-        private double Voltage;
-        private double Current;
+        private double Voltage = 0;
+        private double Current = 0;
         //Display
         //Required
-        private int VerticalResolution;
-        private int HorizontalResolution;
+        private final int VerticalResolution;
+        private final int HorizontalResolution;
         //Optional
-        private int BitsPerPixel;
-        private int RefreshRate;
-        private String Brand;
-        private String Model;
-        private String DisplayTechnology;
+        private int BitsPerPixel = 0;
+        private int RefreshRate = 0;
+        private String Brand = "";
+        private String Model = "";
+        private String DisplayTechnology = "";
         private List<String> DisplayConnectors;
         
         //Methods
-        public TVBuilder(int HorizontalResolution, int VerticalResolution){
+        public Builder(int HorizontalResolution, int VerticalResolution){
             this.HorizontalResolution = HorizontalResolution;
             this.VerticalResolution = VerticalResolution;
         }
-        public TVBuilder setBitsPerPixel(int BPP){
+        public Builder setBitsPerPixel(int BPP){
             this.BitsPerPixel = BPP;
             return this;
         }
-        public TVBuilder setRefreshRate(int RR){
+        public Builder setRefreshRate(int RR){
             this.RefreshRate = RR;
             return this;
         }
-        public TVBuilder setBrand(String Brand){
+        public Builder setBrand(String Brand){
             this.Brand = Brand;
             return this;
         }
-        public TVBuilder setModel(String Model){
+        public Builder setModel(String Model){
             this.Model = Model;
             return this;
         }
-        public TVBuilder setDisplayTechnology(String DT){
+        public Builder setDisplayTechnology(String DT){
             this.DisplayTechnology = DT;
             return this;
         }
-        public TVBuilder setDisplayConnectors(List<String> DC){
+        public Builder setDisplayConnectors(List<String> DC){
             this.DisplayConnectors = DC;
             return this;
         }
-        public TVBuilder addDisplayConnector(String DC){
+        public Builder addDisplayConnector(String DC){
             this.DisplayConnectors.add(DC);
             return this;
-            
+        }
+        public Builder setVoltage(double Voltage){
+            this.Voltage = Voltage;
+            return this;
+        }
+        public Builder setCurrent(double Current){
+            this.Current = Current;
+            return this;
+        }
+        public Builder setPrice(double Price){
+            this.Price = Price;
+            return this;
         }
         public TV build(){
             return new TV(this);
         }
     }
-
+    //Constructor
+    private TV(Builder builder){
+        //Fields
+        //Product
+        Price=builder.Price;
+        //EnergyConsumer
+        Voltage=builder.Voltage;
+        Current=builder.Current;
+        //Display
+        VerticalResolution=builder.VerticalResolution;
+        HorizontalResolution=builder.HorizontalResolution;
+        BitsPerPixel=builder.BitsPerPixel;
+        RefreshRate=builder.RefreshRate;
+        Brand=builder.Brand;
+        Model=builder.Model;
+        DisplayTechnology=builder.DisplayTechnology;
+        DisplayConnectors=builder.DisplayConnectors;
+    } 
     //Product
     public void SetPrice(double Price) {
         this.Price = Price;
@@ -135,4 +147,13 @@ public class TV implements Product, EnergyConsumer, Display{
         return this.DisplayConnectors;
     }
 
+    @Override
+    public String toString(){
+        return String.format("$%-8.2f %s %s, %dx%dx%d@%dhz %s display %s %.0fV %.2fA (%.2fkWh)", Price, Brand, Model, HorizontalResolution, VerticalResolution, BitsPerPixel, RefreshRate, DisplayTechnology, DisplayConnectors, Voltage, Current, (GetPowerConsumption(Voltage, Current)/24));
+    }
+
+    @Override
+    public void accept(ProductVisitor visitor){
+        visitor.visit(this);
+    }
 }

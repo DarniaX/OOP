@@ -16,6 +16,8 @@ public class Fridge implements Product, EnergyConsumer {
         this.HasFreezer = HasFreezer;
         this.Volume = Volume;
         this.Brand = Brand;
+        this.Voltage = Voltage;
+        this.Current = Current;
     }
     static Fridge createFreezer(String Brand, int Volume, double Price){
         return new Fridge(Price, true, Volume, Brand, 240, 2);
@@ -39,5 +41,28 @@ public class Fridge implements Product, EnergyConsumer {
     public double GetCurrent(){
         return Current;
     }
-    
+
+    //Methods
+    public boolean HasFreezer(){
+        return HasFreezer;
+    }
+    public int GetVolume(){
+        return Volume;
+    }
+    public String GetBrand(){
+        return Brand;
+    }
+
+    @Override
+    public String toString(){
+        String freezer = "with";
+        if (!HasFreezer)
+            freezer += "out";
+        return String.format("$%-8.2f %s %d fridge %s freezer %.0fV %.2fA (%.2fkWh)", Price, Brand, Volume, freezer, Voltage, Current, GetPowerConsumption(Voltage, Current));
+    }
+
+    @Override
+    public void accept(ProductVisitor visitor){
+        visitor.visit(this);
+    }
 }
