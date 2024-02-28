@@ -19,5 +19,41 @@ public class Game {
         questions.add(new ThisThatQuestion("Is there a maximum to the amount of constructors a class can have in Java?", "Yes", "No", 1));
         
         // Implement the game stuff here.
+        system.out.println("Welcome to the Java Quiz! We'll be asking two rounds of questions!");
+        Scanner s = new Scanner(System.in);
+        int Player1 = 0;
+        List<Question> WrongQuestions = new LinkedList<>();
+
+        for (int i=0; i<=9; i++){
+            Question questionnow = Question(questions.get(i));
+            questionnow.toString();
+            String input = s.nextLine();
+            if(questionnow.isCorrect(input)){
+                system.out.println("Nice work! You got the answer correct");
+                Player1 += questionnow.getScore();
+            }
+            else{
+                system.out.println("That is not the correct answer, you'll get a second chance though!");
+                WrongQuestions.add(questionnow);
+            }
+
+        }
+        system.out.println("That was the first round, we will now be going over all the wrong questions!");
+        for(int i=0; i<WrongQuestions.size(); i++){
+            Question questionnow = Question(questions.get(i));
+            questionnow.toString();
+            String input = s.nextLine();
+            if(questionnow.isCorrect(input)){
+                system.out.println("Nice work! You got the answer correct, learning fast ;)");
+                Player1 += questionnow.getScore();
+            }
+            else{
+                system.out.println("That is not the correct answer, maybe next you will!");
+            }
+        }
+        system.out.println("That was all! We will now be going over your score!");
+        system.out.println("Your score is: "+ Player1);
+
+        system.out.println("Thank you for playing, until next time!");
     }
 }
