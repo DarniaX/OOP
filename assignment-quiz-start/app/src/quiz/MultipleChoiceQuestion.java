@@ -21,7 +21,7 @@ public class MultipleChoiceQuestion extends Question {
     @Override
     public String toString() {
         String options = "";
-        String[] possibleAnswers = {"a) ", "b) ", "c) ", "d) ", "e) ", "f) ", "g) ", "h) ", "i) "};
+        String[] possibleAnswers = {"a) ", "b) ", "c) ", "d) ", "e) ", "f) ", "g) ", "h) ", "i) ", "j) "};
         for (int i = 0; i < answer.length; i++){
             options += possibleAnswers[i] + answer[i] + '\n';
         }
@@ -30,7 +30,7 @@ public class MultipleChoiceQuestion extends Question {
 
     @Override
     public boolean isCorrect(String answer){
-        String[] possibleAnswers = {"a", "b", "c", "d", "e", "f", "g", "h", "i"};
+        String[] possibleAnswers = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"};
         if (possibleAnswers[correctAnswer].equalsIgnoreCase(answer))
             return true;
         return false;
@@ -38,7 +38,7 @@ public class MultipleChoiceQuestion extends Question {
 
     @Override
     public String correctAnswer(){
-        String[] possibleAnswers = {"a) ", "b) ", "c) ", "d) ", "e) ", "f) ", "g) ", "h) ", "i) "};
+        String[] possibleAnswers = {"a) ", "b) ", "c) ", "d) ", "e) ", "f) ", "g) ", "h) ", "i) ", "j) "};
         return "The correct answer is: " + possibleAnswers[correctAnswer];
     }
 }
