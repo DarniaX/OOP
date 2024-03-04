@@ -19,41 +19,46 @@ public class Game {
         questions.add(new ThisThatQuestion("Is there a maximum to the amount of constructors a class can have in Java?", "Yes", "No", 1));
         
         // Implement the game stuff here.
-        system.out.println("Welcome to the Java Quiz! We'll be asking two rounds of questions!");
+        System.out.println("Welcome to the Java Quiz! We'll be asking two rounds of questions!");
         Scanner s = new Scanner(System.in);
-        int Player1 = 0;
+        int ScoreRound1 = 0;
         List<Question> WrongQuestions = new LinkedList<>();
 
-        for (int i=0; i<=9; i++){
-            Question questionnow = Question(questions.get(i));
-            questionnow.toString();
+        for (int i=0; i < questions.size(); i++){
+            Question questionnow = questions.get(i);
+            System.out.println(questionnow);
             String input = s.nextLine();
             if(questionnow.isCorrect(input)){
-                system.out.println("Nice work! You got the answer correct");
-                Player1 += questionnow.getScore();
+                System.out.println("Nice work! You got the answer correct" + '\n');
+                ScoreRound1 += questionnow.getScore();
             }
             else{
-                system.out.println("That is not the correct answer, you'll get a second chance though!");
+                System.out.println("That is not the correct answer, you'll get a second chance though!" + '\n');
                 WrongQuestions.add(questionnow);
             }
 
         }
-        system.out.println("That was the first round, we will now be going over all the wrong questions!");
+        int ScoreRound2 = 0;
+        System.out.println("That was the first round, we will now be going over all the wrong questions!");
         for(int i=0; i<WrongQuestions.size(); i++){
-            Question questionnow = Question(questions.get(i));
-            questionnow.toString();
+            Question questionnow = WrongQuestions.get(i);
+            System.out.println(questionnow);
             String input = s.nextLine();
             if(questionnow.isCorrect(input)){
-                system.out.println("Nice work! You got the answer correct, learning fast ;)");
-                Player1 += questionnow.getScore();
+                System.out.println("Nice work! You got the answer correct, learning fast ;)" + '\n');
+                ScoreRound2 += questionnow.getScore();
             }
             else{
-                system.out.println("That is not the correct answer, maybe next you will!");
+                System.out.println("That is not the correct answer, maybe next time!" + '\n');
             }
         }
-        system.out.println("That was all! We will now be going over your score!");
-        system.out.println("Your score is: "+ Player1);
+        System.out.println("That was all! We will now be going over your score!");
+        System.out.println("Your score from round 1 is: "+ ScoreRound1);
+        System.out.println("Your score from round 2 is: "+ ScoreRound2);
+        System.out.println("That brings your total score to: " + (ScoreRound1 + ScoreRound2) + ", Well done!");
 
-        system.out.println("Thank you for playing, until next time!");
+        System.out.println("Thank you for playing, until next time!");
+        s.close();
     }
+
 }

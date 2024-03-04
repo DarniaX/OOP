@@ -11,7 +11,7 @@ public abstract class Question {
     }
     public Question (String question, int score){
         this.question = question;
-        this.setScore(3);
+        this.setScore(score);
     }
 
     // Methods
