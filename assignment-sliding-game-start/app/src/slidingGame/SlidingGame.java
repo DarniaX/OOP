@@ -64,7 +64,8 @@ public class SlidingGame implements Configuration {
 
 	@Override
 	public boolean equals(Object o) {
-		throw new UnsupportedOperationException("equals : not supported yet.");
+		//Bit unorthodox, but works!
+		return this.toString() == o.toString();
 	}
 
 	@Override
@@ -79,7 +80,7 @@ public class SlidingGame implements Configuration {
 
 	@Override
 	public int compareTo(Configuration g) {
-		throw new UnsupportedOperationException("compareTo : not supported yet.");
+		return this.manhattanDist-g.manhattanDist;
 	}
 
 	@Override
