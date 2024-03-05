@@ -10,10 +10,11 @@ public class Solver {
 	// A queue for maintaining states that are not visited yet.
 	private Queue<Configuration> toExamine;
 	// A collection of states that have been visited
-	private Collection<Configuration> encountered;
+	private Collection<Configuration> encountered = new HashSet<>();
 
 	public Solver(Configuration g) {
-		throw new UnsupportedOperationException("Solver: not supported yet.");
+		toExamine = new PriorityQueue<>();
+		toExamine.add(g);
 	}
 
 	/**
@@ -25,10 +26,13 @@ public class Solver {
 		while (!toExamine.isEmpty()) {
 			Configuration next = toExamine.remove();
 			if (next.isSolution()) {
-				return next.toString();
+				return next.toSolutionString();
 			} else {
 				for (Configuration succ : next.successors()) {
-					toExamine.add(succ);
+						if (!encountered.contains(succ)){
+							toExamine.add(succ);
+							encountered.add(succ);
+						}
 				}
 			}
 		}

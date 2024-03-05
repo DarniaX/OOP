@@ -22,6 +22,7 @@ public class Main {
 			, 16, 17, 18, 19, 20
 			, 21, 22, 23, 24,  6
 			};
+		
 
 		SlidingGame s = new SlidingGame(sevenSteps);
 		Solver solver = new Solver(s);
