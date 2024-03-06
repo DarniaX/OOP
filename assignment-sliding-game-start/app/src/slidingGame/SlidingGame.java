@@ -55,6 +55,51 @@ public class SlidingGame implements Configuration {
 	}
 
 	public int getManhattanDistance() {
+		//Get first piece, and calculate the distance
+		//   0  1  2
+		//0  1  2  3
+		//1  4  5  6
+		//2  7  8  9
+		
+		//   0  1  2
+		//0  9  8  7
+		//1  6  5  4
+		//2  3  2  1
+
+		//   0  1  2
+		//0  4  2  4
+        //1  2  0  2
+		//2  4  2  4
+
+		int solutionindex = 0;
+		int manhattanTileDist;
+		int manhattanTotal;
+
+		//Loop through all the board entries
+		for(int x=0; x<=this.board.size; x++){
+			for(int y=0; y<=this.board[0].size; y++){
+				//Loop through the solution
+				for(int index=1; index<=this.board.size*this.board[0].size; index++){
+					if(this.board[x][y]==index){
+						solutionindex = index;
+						//found the index of this board entry
+						//to find the coordinates of this board entry;
+						int solutionx = solutionindex%this.board[0].size;
+						//i.e. index = 4, 3x3 board
+						//4%3 = 1 and that checks out
+						int solutiony = Math.floor(solutionindex/this.board.size)+1;
+						//i.e. index = 4, 3x3 board
+						//4/3 = 1.33
+						//round down = 1
+						//1+1 = 2, and that is correct
+					}
+				}
+				manhattanTileDist = Math.abs(x-solutionx)+Math.abs(y-solutiony);
+				manhattanTotal =+ manhattanTileDist;
+			}
+		}
+		this.manhattanDist = manhattanTotal;
+
 		return manhattanDist;
 	}
 
